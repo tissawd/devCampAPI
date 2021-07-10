@@ -1,6 +1,8 @@
 const express = require('express');
 const dotenv = require('dotenv');
 
+const logger = require('./middleware/logger');
+
 // Route files
 const bootcamps = require('./routes/bootcamps.js')
 
@@ -9,8 +11,15 @@ dotenv.config({ path: './config/config.env' });
 
 const app = express();
 
+
+
+// use Middleware
+app.use(logger);
+
 // Mount routes
 app.use('/api/v1/bootcamps', bootcamps);
+
+
 
 const PORT = process.env.PORT || 8080;
 
